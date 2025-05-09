@@ -1,0 +1,187 @@
+UNIX administration:
+---------------------
+	- its an operating system
+	- UNIX - UNiplexed Information and Computing System (UNICS)
+	- released in 1st Jan 1970
+	- developed by Dennis Ritchie and Ken Thompson
+	- in AT & T bell labs
+	- in "C" language
+	
+UNIX operating system
+	- AIX (by IBM)
+	- HPUX (by HP)
+	- Solaris (by oracle)
+	- MacOS (by Apple)
+
+concepts:
+	- Opensource	-->  Linux
+		- it is 
+			- free to use
+			- free to download (source code)
+			- free to share
+	- Freeware		-->	UNIX
+		- free to use
+		- free to share
+		- you can not download the source code
+		
+UNIX
+	- is hardware dependent
+	
+Linux Benedict Torwalds
+	- creator of Linux OS
+	- 1991
+	
+Why to choose LINUX ?
+- Easy to install applications	-> package manager
+- Secure	-> SELinux (Security Enhanced Linux)
+- Easy to change options -> Graphical Machines (GUI)
+- Community
+- Free
+- Portable	-> Live ISO
+- Open Source
+- Multi-User Hierarchical File System (FHS)
+
+
+
+Shell 
+	- check/validate the command is correct or not.
+	- convert the english command into valid binary code and transfer it to kernel
+	- types of shells
+		- CSH
+		- TCSH
+		- SH
+		- BASH	--> default
+		- POSIX
+		- Korn Shell (KSH)
+	- list of all the installed shells are present in 
+		- /etc/shells
+		
+Linux booting process:
+-------------------
+Power On   -->   BIOS 
+BIOS
+	- Basic Input Output System
+	- performs POST (Power On Self Test) 
+
+Power On   -->   BIOS   -->   MBR
+MBR
+	- Master Boot Record
+	- holds the address of operating system
+	- size: 512 bytes
+	
+Power On   -->   BIOS   -->   MBR  --> GRUB	
+GRUB
+	- GRand Unified Bootloader
+	- current version: v2.0
+	- displays/lists all the operating systems that are present in HDD
+
+Power On   -->   BIOS   -->   MBR  --> GRUB	 --> Kernel
+Kernel
+	- is the heart of operating system
+	- it loads the OS from HDD to RAM using (initrd.img)
+	- it loads the other required services
+
+Power On   -->   BIOS   -->   MBR  --> GRUB	 --> Kernel --> systemd
+systemd
+	- systemd process is initialized 
+	- SYSTEMD as 1st process of linux OS.
+	- old name: "init"
+	- Process ID: 1
+
+Power On   -->   BIOS   -->   MBR  --> GRUB	 --> Kernel --> systemd --> Runlevel
+Runlevel
+	- its the mode, in which the system must be started
+	- there are 7 modes in runlevels
+	-----------------------------------------------------------
+	      OLD    |  Runlevel Cmds   | Commonly used Cmds
+	-----------------------------------------------------------
+		- init 0 - runlevel0.target - poweroff.target
+		- init 1 - runlevel1.target - rescue.target
+		- init 2 - runlevel2.target - multi-user.target
+		- init 3 - runlevel3.target - multi-user.target
+		- init 4 - runlevel4.target - multi-user.target
+		- init 5 - runlevel5.target - graphical.target
+		- init 6 - runlevel6.target - reboot.target
+	-----------------------------------------------------------
+	
+Power On   -->   BIOS   -->   MBR  --> GRUB	 --> Kernel --> systemd --> Runlevel -> login
+login
+	- username
+	- password
+
+CentOS/RedHat 7/8/9 -> the whole booting process generally take upto 20Sec
+
+users in linux:
+	1. root (administrator in windows)
+	2. regular users 
+
+
+File system Hierarchy Standard:
+-------------------------------
+"/"
+	- /boot		- bootable file in it. (min: 350MB)
+	- /home 	- home directory for regular users
+					-> chaturya		-> /home/chaturya
+					-> ganesh		-> /home/ganesh
+					-> hulk			-> /home/hulk
+	- /root		- home directory for root user
+	- /bin  	- contains the binary commands that a "regular user" can execute
+	- /sbin 	- contains the binary commands that a "ROOT user" can execute
+				- root user can also execute /bin commands
+	- /etc  	- contains all the configuration files in it. [IMP]
+	- /dev  	- contains all the "device" related files in it.
+	- /mnt  	- contains all the temporary mount points, user access this /mnt (old)
+					- /mnt/abc
+	- /run  	- all the running media (other device)
+					- /run/media/abc
+	- /tmp  	- temporary files
+	- /usr  	- contains all the user installed applications
+	- /opt		- contains all the user installed applications (old)
+	- /var		- variable length file. It contains the LOG FILES.
+	- /lib		- developers library. (32bit)
+	- /libx64	- developers library. (64bit)
+	- /proc		- it contains all the running processes information in it.
+	
+create & modification a file:
+---------------
+	- touch
+		- create blank files
+		- updates the timestamp (last modified time) of a file
+	- cat
+		- create
+		- view
+		- override
+		- append
+		- concatenate
+	- nano	
+		- create, modify 
+	- gedit
+		- create, modify 
+	- vim
+		- create, modify 
+		
+Delete file/directory
+	- rm	--> deletes a file or directory
+	- rmdir	--> deletes the empty directory
+	
+copy file within a system
+	- cp <source>  <destination>
+	
+copy file from one system to another
+	- scp <source>  <destination>
+
+move a file
+	- mv <old-file-location>  <new-file-location>
+	
+rename a file 
+	- mv <old-file-name>  <new-file-name>
+	
+hide a file
+	- mv <file-name>  .<file-name>
+
+unhide a file
+	- mv .<file-name>  <file-name>
+
+list anything
+	- ls			--> list 
+	- ls -a			--> list all (hidden & visible)
