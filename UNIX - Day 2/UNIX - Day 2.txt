@@ -1,0 +1,134 @@
+.	-> current directory
+..	-> parent directory (one directory up)
+
+Permission:
+-------------
+	types:
+		- r = read		-> 4
+		- w = write		-> 2
+		- x = execute	-> 1
+		---------------------
+		      total		-> 7
+		---------------------
+		
+	types of users accessing the file:
+		- owner		-> u
+		- group		-> g
+		- other		-> o
+		-----------------
+			all		-> a
+		-----------------
+		
+directory	->	777		(7 -> owner, 7 -> groupowner, 7 -> other)
+files		->  666		(6 -> owner, 6 -> groupowner, 6 -> other)
+
+directory	-> 7 -> 4 (read) + 2 (write) + 1 (execute)
+file		-> 6 -> 4 (read) + 2 (write) + 0 (execute)
+
+directory	-> 777 - 755 = 022 (umask)
+files		-> 666 - 644 = 022 (umask)
+
+umask - changes the permissions for all newly created files or directories
+chmod - changes the permissions for any existing files or directories
+
+chmod command can be applied in 2 ways:
+	1. numerical method
+		# chmod    <permissions>      <file/directory name>
+		
+		to give full access on a file
+			# chmod   777   file1.txt
+		
+		to give full access to owner, no access to group & others 
+			# chmod   700   file2.txt
+		
+		to give no permissions to anyone
+			# chmod   000   file3.txt
+		
+	2. symbolic/alphabetical method
+		Syntax
+		# chmod     <u/g/o/a><=+-><r/w/x>     <file/directory-name> 
+		
+		to give full access on a file
+			# chmod   ugo=rwx   file1.txt		//OR
+			# chmod   a=rwx     file1.txt
+		
+		to give full access to owner, no access to group & others 
+			# chmod   u=rwx,go-rwx   file2.txt
+		
+		to give no permissions to anyone
+			# chmod   a-rwx   file3.txt
+
+To change the ownership of a file/directory:
+	# chown    <username>    file/directory-name
+	
+To change the groupowner of a file-directory:
+	# chgrp    <groupname>   file-directory
+	# chown    :<groupname>   file-directory
+	
+To change the ownership and groupowner of a file-directory:
+	# chown    <username>:<groupname>   file-directory
+	
+User Management:
+----------------
+	- adding a new user		- useradd
+	- modifying a user		- usermod
+	- delete a user			- userdel
+	
+2 major files:
+	1. /etc/passwd
+		- it contains users INFORMATION.
+		- it contains 7 columns in it, seperated by ":"
+			1. login name of user
+			2. "X" -> refferenced passwd --> /etc/shadow file
+			3. User ID 
+			4. Group ID
+			5. comment / description of the user.
+			6. default home directory
+			7. default shell
+							
+	2. /etc/shadow
+		- it contains the user's password policy/information, in the encrypted format.
+		- it contains 9 columns in it:
+			1. login name of the user
+			2. true encrypted password
+				a. text -> centos   +
+				b. hashing algo
+					$6 -> SHA512
+					$1 -> MD5
+				c. salt text - to ensure that no 2 users will have same pwd.
+			3. last pwd change (since 1st Jan 1970) -> epoch date
+			4. minimum pwd age -> 0 days
+			5. maximum pwd age -> 99999 days ~> 273yrs (60days)
+			6. warning days	   -> 7 days 
+			7. inactive days	-> 0
+			8. account expiry	-> account must expire after X days.
+			9. unsed till date
+			
+to create a user
+	# useradd   <options>   <username>
+	# useradd  -c "Bruce Banner"  hulk
+	
+to provide password
+	# passwd  hulk			-> root user
+	$ passwd
+	
+# to modify:
+	# usermod
+	
+ACL
+	- Access control list
+	- provide access to any user or group to a file/directory
+	- used for more fine-grained permissions
+	- cmds:
+		1. getfacl	-> get/list file ACL
+			# getfacl  <file/directory-name>
+			
+		2. setfacl	-> set/change file ACL
+			- to apply ACL on a user
+				# setfacl -m u:<username>:rw-   <file/directory-name>
+			- to apply ACL on a group
+				# setfacl -m g:<groupname>:rw-   <file/directory-name>
+			- to remove ACL
+				# setfacl -b  <file/directory-name>
+			
+		
