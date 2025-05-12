@@ -1,0 +1,171 @@
+Package management:
+-------------------
+	- package (in linux) == software (in windows)
+	- to manage packages in linux, we have package managers
+		- package managers
+			- install 
+			- update
+			- upgrade
+			- get the information
+			- remove/uninstall
+	- package managers
+		- RPM (Redhat Package Manager)
+			- Redhat, centos
+		- YUM (Yellowdog Updater Modifier / Yellowdog update manager)
+			- Redhat, centos
+		- APT (Advance Packaging Tool)
+			- Ubuntu
+		- DNF (DaNdiFied package manager)
+			- redhat, centos
+		- DPKG (Debian Package Manager)
+			- kali, backtrack, ubuntu
+	- ex:
+		YUM -> yum install <package>
+		ATP -> apt install <package>
+		DNF -> dnf install <package>
+		
+Naming convention:
+-------------------
+	name-version-release-architecture.rpm
+		architecture
+			- i686		- 32bit
+			- x86_64	- 64bit
+			- noarch	- both (32 & 64 bit)
+
+install package:
+----------------
+	1. online
+		- online server
+			- RHEL - RHN (RedHat Network), paid, subscription is required.
+			- CentOS - Mirror servers - free
+			- Ubuntu - Ubuntu package repository - free
+			- online FTP servers 
+	
+	2. offline
+		- CD/DVD (that was used for installation)
+			- to count the number of packages from DVD
+				# ls | wc -l
+					ls = list
+					wc = word count
+					-l = count line-by-line
+		- download package from online FTP servers 
+
+Task
+	- i686
+	- x86_64
+	- noarch
+	
+CentOS 
+(RPM) -> offline
+	- install
+		# rpm   -ivh   <full-package-name>.rpm
+			i = install
+			v = verbose (show whats happening in background)
+			h = hashing	(##################################)
+	- query
+		# rpm    -q	  <package-name> 	//single package
+		# rpm    -qa					//all installed package
+	- update
+		# rpm -Uvh  <full-package-name>.rpm
+			U = update (in caps)
+	- uninstall
+		# rpm    -e	 <package-name> 	//remove package
+	
+(YUM) -> online 
+	- install
+		# yum install -y <package-name>
+	- query
+		# yum info <package-name>
+	- update
+		# yum update -y <package-name>		//update single pkg
+		# yum update -y 					//update whole OS
+	- uninstall
+		# yum remove -y <package-name>
+
+LVM:
+-----
+	- Logical Volume Manager
+	- its a storage solution.
+	- we can take multiple storage disks of various sizes, and logically club them together, to make one-single disk.
+	
+steps to create LVM:
+--------------------
+	- add the disk 
+	- format the disk using fdisk utility
+		# fdisk /dev/sdb	-> /dev/sdb1
+		# fdisk /dev/sdc	-> /dev/sdc1
+	- create physical volume (PV)
+		# pvcreate  /dev/sdb1  /dev/sdc1
+	- create volume group (VG)
+		# vgcreate     vg    /dev/sdb1      /dev/sdc1
+	- create logical volume (LV)
+		# lvcreate    -n   lv    -l  100%FREE    vg
+	- create a file system for this LV
+		# mkfs.xfs   /dev/vg/lv
+	- create a mount point for this LVM
+		# mkdir   /lvm
+	- mount the file system 
+		# mount    <what to mount>    <where to mount>
+		# mount   /dev/vg/lv    /lvm
+	- verify
+		# mount -a
+		# df -hT
+
+Process:
+---------
+	- 1st process is "systemd"
+	- cmds:
+		# pstree			//heirarchy of processes
+		# pgrep systemd		//list process ID using process name
+		# top				//Table Of Process (task manager in windows)
+	
+	to kill a process (2 methods)
+		1. kill a process (9)
+			# kill  -9   <pid_of_process>
+		
+		2. terminate process (15)
+			# kill  -15   <pid_of_process>
+			
+Logs:
+=========
+	- logs are stores in "/var" location
+	- log locations
+		general logs						-> /var/log/messages
+		system logs (ubuntu)				-> /var/log/syslog
+		authentication & authorization		-> /var/log/auth.log
+		kernel messages						-> /var/log/kern.log
+		boot time logs						-> /var/log/dmesg
+		
+	- commands:
+		- to list all logs
+			# journalctl
+		- to list specific service logs
+			# journalctl -u <servicename>
+		- to list error logs
+			# journalctl -p err
+			
+Backup tools:
+---------------
+	rsync		-	file-level incremental backup tool
+	tar			-	archiving file & directories
+	dd			-	block-level backup
+	cp			-	copy
+	rsnapshot	-	automated snapshots with rsync
+	
+Patching:
+------------
+	- Patching refers to updating software packages or linux kernel
+	- with Patching, we can resolve:
+		- security vulnerabilities
+		- bugs
+		- performance issues
+		- compatibility problems
+	- types of patching:	
+		1. manual patching
+			- you need to decide when & what to update
+		2. automated patching
+			- system updates itself
+		3. live kernel patching
+			- applying kernel updates without reboot (kpatch)
+			
+	
