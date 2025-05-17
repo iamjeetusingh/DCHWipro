@@ -1,0 +1,186 @@
+Types of backups:
+	- Full backup
+		- complete copy of the database will be backed up.
+	- Incremental backup
+		- only the changes since the last backup.
+	- Differential backup
+		- changes since the last FULL backup
+		
+Recovery methods:
+	- Restore it from latest backup
+	- Point in time recovery using logs
+
+RPO 
+	- Recovery Point Objective
+	- how much data (in terms of time) can be lost, in an event of disaster.
+	- Ex: RPO = 15mins -> you could loose at most 15mins of data.
+
+RTO
+	- Recovery TIme Objective
+	- how quickly you need to restore the data/services/system backup.
+	- Ex: RTO = 1Hr -> system must be fully restored within 1hr.
+	
+Scalability:
+	- refers to system's ability to handle in increasing/decreasing workload.
+	- types
+		1. Vertical Scalability
+			- Scale Up
+			- adding more CPU & RAM to a single server
+		2. Horizontal Scalability
+			- Scale Out
+			- adding more servers to the env.
+			
+Data Independence
+	- the ability to change the schema at one level without affecting the next higher level.
+	- type:
+		- logical Data Independence
+			- add a column, this should not affect the application
+		- Physical Data Independence
+			- physical storage (indexing or file structure)
+
+Query Language Support
+	- SQL (Structured Query Language) - used in RDBMS
+	- CQL (Cassandra Query Language) - used in Cassandra
+	- MongoDB Query	Language - used in NoSQL database
+	- KQL (Kusto Query Language) - Azure Log analytics
+	
+Types of databases:
+--------------------
+	1. Relational database
+		- RDBMS
+		- based on rows and columns
+		- uses SQL
+		- Ex: MySQL, PostgreSQL, Oracle, SQL server
+	2. NoSQL database
+		- not based on traditional databases
+		- types:
+			- Key-Value --> Redis
+			- Document	--> MongoDB
+			- Columne	--> Cassandra
+			- Graph		--> Neo4j
+	3. In-memory database
+		- in this, databae stores the entire data on system's RAM instead of disk.
+		- this allows for very fast data access.
+		- used for caching, session mgmt, real-time analytics
+		- Ex: Redis
+	4. Time-series database
+		- used for handling time-stamped or time-series data
+		- useful for:
+			- logs
+			- stock prices
+			- sensor data
+		- efficient for sequential data or time-oriented data
+		- Ex: InfluxDB
+	5. Object-oriented database
+		- stores the data as objects
+		- it supports complex data types 
+			- objects
+			- arrays
+			- lists
+			- inheritance, encapsulation, polymorphism
+		- Ex: dn4o, ObjectDB, Versant Object database
+		
+Database concepts:
+-------------------
+	- Entity
+		- an object or a thing (student)
+	- attribute
+		- property of an entity (Name, RollNo)
+	- Primary key
+		- unique ID
+	- foreign key
+		- ref. to the primary key in another table
+
+#############################
+Ques1 - mysql + azure
+	 - I have installed MySQL on my Azure VM. but the client app, which is running on another VM in the same subnet, is unable to communicate with this MySQL server. How to resolve this?
+Ans1 - allow port 3306 in network security group (NSG).
+
+Ques2 - mysql + azure
+	 - I have installed MySQL on my Azure VM. but the client app, which is running on another VM in the different subnet, is unable to communicate with this MySQL server. How to resolve this?
+Ans2 - vNet Peering, allows you to enable the communication between 2 resources in 2 different virtual networks.
+#############################
+
+Data types in SQL:
+--------------------
+1. Numeric data type
+	- int
+	- float
+	- double
+	- smallint
+	- tinyint
+	- bigint
+2. string / text
+	- char
+	- varchar
+	- text
+	- tinytext
+3. date & time
+	- date
+	- time
+	- datetime
+	- year
+4. boolean 
+	- bool/boolean
+
+
+
+You are given the responsibility to manage the data for a company's employee database. 
+Use the following schema:
+Table: employees
+Column Name		Data Type			Description
+id				INT (Primary Key)	Unique Employee ID
+name			VARCHAR(100)		Employee Name
+department		VARCHAR(50)			Department Name
+salary			DECIMAL(10,2)		Employee Salary
+join_date		DATE				Date of Joining
+
+Task: Perform all 4 CRUD operations
+	1. CREATE: Create the employees table
+		Write an SQL query to create the above table.
+		Hint: Use CREATE TABLE with proper data types and constraints like PRIMARY KEY.
+	2. INSERT: Add sample employee records
+		Insert the following records
+		Hint: Use INSERT INTO with column names and VALUES.
+	3. READ: Fetch specific data 
+		Write an SQL query to fetch names and salaries of all employees who joined after January 1, 2022.
+		Hint: Use SELECT with WHERE ...
+	4. UPDATE: Change department
+		Bob has moved from IT to Finance. Write a query to update his department.
+		Hint: Use UPDATE with SET department = 'Finance' and filter with WHERE name = 'Bob'.
+	5. DELETE: Remove an employee
+		Charlie has resigned. Write a query to remove his record from the table.
+	6. Write a query to display all employees, sorted by salary in descending order.
+		Hint: Use ORDER BY salary DESC.
+		
+		
+15. Perform the following operation:
+	You are building a database for a city library to manage books and their availability.
+📄 Table: books
+	Column Name			Data Type			Description
+	book_id				INT (Primary Key)	Unique Book ID
+	title				VARCHAR(150)		Title of the book
+	author				VARCHAR(100)		Author of the book
+	genre				VARCHAR(50)			Book genre (e.g., Fiction, Tech)
+	published_year		YEAR				Year the book was published
+	available_copies	INT					Number of copies currently in library
+
+	1. CREATE
+	Write an SQL query to create the books table with appropriate data types and a primary key.
+
+	2. INSERT
+	Insert the following 4 books into the table:
+	book_id	title						author					genre			published_year	available_copies
+	101		The Alchemist				Paulo Coelho			Fiction			1993				5
+	102		Clean Code					Robert C. Martin		Tech			2008				2
+	103		Wings of Fire				A. P. J. Abdul Kalam	Biography		1999				3
+	104		Introduction to Algorithms	Thomas H. Cormen		Tech			2009				4
+
+	3. READ
+	Write a query to retrieve the titles and authors of all Tech books published after the year 2000.
+
+	4. UPDATE
+	One copy of "Clean Code" was returned. Increase its available_copies by 1.
+
+	5. DELETE
+	"The Alchemist" is no longer available. Remove it from the database.

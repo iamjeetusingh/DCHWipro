@@ -1,0 +1,83 @@
+Task Questions:
+-----------------
+1. install win10 using the following details:
+	- Name: win10
+	- IP: 192.168.10.20
+	- subnet: 255.255.255.0
+	- GW: 192.168.10.10
+	- DNS: 192.168.10.10
+2. install RAID 0 on windows 10 operating system.
+3. display 1st 10 logs on windows 10.
+4. install 1 domain controller (with the name "Wipro.in") with 2 node servers added as domain joined machines.
+	DC 	  - 192.168.10.10/24 - win svr data center eval (desktop exp)
+	Node1 - 192.168.10.11/24 - win svr data center eval (desktop exp)
+	Node2 - 192.168.10.12/24 - win svr data center eval (desktop exp)
+5. create a storage space of 30GB and access it on DC machine.
+6. Create NFS shared folder (named: NFSShareFolder)on DC machine and access it on both nodes.
+7. perform backup of this newly added storage space using WSB.
+8. Install & configure data deduplication on DC machine.
+9. Create a failover cluster using DC, Node01 & Node02
+10. Install and configure NLB using IIS web server sites on both nodes.
+
+11. Install a Linux server with the following information:
+	- hostname: <yourLastName>.wipro.in
+	- IP Addr : 192.168.10.13/24
+	- DNS: 192.168.10.10
+
+12. Add 2 disks of 5GB each and configure an LVM with EXT4 file system with 100% size of the disks.
+
+13. Add 2 groups in linux 
+	- HR 		-add-> hruser1, hruser2
+	- Accounts 	-add-> accuser1, accuser2
+	and give these 2 groups with Read and Write permission to "/salary" folder and ensure no other users/groups will have any access to this folder.
+
+14. domain join this linux virtual machine to the active directory and verify if the Linux system entry is present in the DNS, else manually create one.
+
+15. Perform the following operation:
+	You are building a database for a city library to manage books and their availability.
+
+	📄 Table: books
+	Column Name			Data Type			Description
+	book_id				INT (Primary Key)	Unique Book ID
+	title				VARCHAR(150)		Title of the book
+	author				VARCHAR(100)		Author of the book
+	genre				VARCHAR(50)			Book genre (e.g., Fiction, Tech)
+	published_year		YEAR				Year the book was published
+	available_copies	INT					Number of copies currently in library
+
+	1. CREATE
+	Write an SQL query to create the books table with appropriate data types and a primary key.
+
+	2. INSERT
+	Insert the following 4 books into the table:
+	book_id	title						author					genre			published_year	available_copies
+	101		The Alchemist				Paulo Coelho			Fiction			1993				5
+	102		Clean Code					Robert C. Martin		Tech			2008				2
+	103		Wings of Fire				A. P. J. Abdul Kalam	Biography		1999				3
+	104		Introduction to Algorithms	Thomas H. Cormen		Tech			2009				4
+
+	3. READ
+	Write a query to retrieve the titles and authors of all Tech books published after the year 2000.
+
+	4. UPDATE
+	One copy of "Clean Code" was returned. Increase its available_copies by 1.
+
+	5. DELETE
+	"The Alchemist" is no longer available. Remove it from the database.
+
+16. Create an OU in AD with the name "WiproDCHB2Task" and add 5 users using powershell script to this OU with the requirement to change the user's password at next login.
+
+17. Use powershell command or GUI to enable the AD-Recycle bin.
+
+18. delete a user from the OU "WiproDCHB2Task" and then try restoring it and verify.
+
+19. Take the backup of AD server using Windows Server Backup utility.
+
+20. Use existing database table and perform the following tasks
+	- adding bulk entries to the table
+	- list the duplicates rows if any.
+	- create index of the existing table.
+	- perform:
+		- truncate
+		- drop
+		- alter commands
